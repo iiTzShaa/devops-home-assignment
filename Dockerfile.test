@@ -1,0 +1,11 @@
+# Use a lightweight Python image as the base
+FROM python:3-slim
+
+# Install the requests library 
+RUN pip install requests
+
+# Copy the Python test script into the container
+COPY test_script.py /test_script.py
+
+# Set the default command to run the test script
+CMD ["python3", "/test_script.py"]

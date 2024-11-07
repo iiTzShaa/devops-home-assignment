@@ -1,0 +1,24 @@
+# Specify the version of Docker Compose file syntax being used
+version: '3'
+
+# Define the services (containers) that will be part of this application
+services:
+
+  # Define the Nginx service
+  nginx:
+    # Specify the build context and Dockerfile for the Nginx service
+    build:
+      context: .                # The current directory is used as the build context
+      dockerfile: Dockerfile.nginx  # Specifies Dockerfile.nginx to build the nginx container
+    ports:
+      - "8082:8080"  # Map port 8082 on the host to port 8080 in the container
+      - "8083:8081"  # Map port 8083 on the host to port 8081 in the container
+
+  # Define the test service, which runs the Python script to check Nginx responses
+  test:
+    # Specify the build context and Dockerfile for the test service
+    build:
+      context: .                # The current directory is used as the build context
+      dockerfile: Dockerfile.test  # Specifies Dockerfile.test to build the test container
+    depends_on:
+      - nginx  # Ensures the nginx service starts before the test service begins
