@@ -1,0 +1,41 @@
+name: CI Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and run Docker Compose
+        run: |
+          docker-compose up --build --abort-on-container-exit
+
+      # This step runs if the previous step (Docker Compose) failed
+      - name: Record Failure Result
+        if: failure()
+        run: echo "fail" > result.txt
+
+      # This step runs if the previous step (Docker Compose) succeeded
+      - name: Record Success Result
+        if: success()
+        run: echo "succeeded" > result.txt
+
+      # Upload the result as an artifact regardless of the test outcome
+      - name: Upload test result as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: result
+          path: result.txt
