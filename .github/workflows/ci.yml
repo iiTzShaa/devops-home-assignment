@@ -21,19 +21,16 @@ jobs:
 
       - name: Build and run Docker Compose
         run: |
-          docker-compose up --build --abort-on-container-exit
+          docker compose up --build --abort-on-container-exit
 
-      # This step runs if the previous step (Docker Compose) failed
       - name: Record Failure Result
         if: failure()
         run: echo "fail" > result.txt
 
-      # This step runs if the previous step (Docker Compose) succeeded
       - name: Record Success Result
         if: success()
         run: echo "succeeded" > result.txt
 
-      # Upload the result as an artifact regardless of the test outcome
       - name: Upload test result as artifact
         uses: actions/upload-artifact@v4
         with:
