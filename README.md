@@ -16,3 +16,29 @@ devops-home-assignment/
 └── .github/
     └── workflows/
         └── ci.yml            # GitHub Actions workflow for automated testing
+Workflow Diagram
+plaintext
+Copy code
+                     +------------------+
+                     | GitHub Actions   |
+                     |   Workflow       |
+                     +------------------+
+                             |
+                             | Push to Main
+                             |
+                     +------------------+
+                     | Docker Compose   |
+                     |  (Local / CI)    |
+                     +------------------+
+                             |
+                             |
+                    +--------+--------+
+                    |                 |
+           +--------v--------+ +------v-------+
+           |   Nginx Server  | | Python Test   |
+           |  (Responds on   | |   Service     |
+           |   Two Ports)    | | (Validates    |
+           |                 | | Responses)    |
+           +-----------------+ +---------------+
+Nginx Server: Responds on two ports, each with a distinct response.
+Python Test Service: Sends requests to both ports and checks if the responses match the expected output.
