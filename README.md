@@ -16,9 +16,11 @@ devops-home-assignment/
 └── .github/
     └── workflows/
         └── ci.yml            # GitHub Actions workflow for automated testing
+
 Workflow Diagram
-plaintext
-Copy code
+```plaintext
+
+
                      +------------------+
                      | GitHub Actions   |
                      |   Workflow       |
