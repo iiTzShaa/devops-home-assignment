@@ -5,7 +5,7 @@ This repository contains a Docker Compose setup to deploy and test an Nginx serv
 - A **Python test service** that checks the responses from the Nginx server.
 - **GitHub Actions** configured to automate testing on each push to the `main` branch.
 
-## Project Structure
+## Project Structure and Workflow Diagram
 
 ```plaintext
 devops-home-assignment/
@@ -16,9 +16,6 @@ devops-home-assignment/
 └── .github/
     └── workflows/
         └── ci.yml            # GitHub Actions workflow for automated testing
-
-Workflow Diagram
-```plaintext
 
 
                      +------------------+
